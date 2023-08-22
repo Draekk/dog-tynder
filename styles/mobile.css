@@ -56,7 +56,6 @@ h1 {
 
 main {
     height: 80vh;
-    padding: 2vw;
 }
 
 main .container {
@@ -77,7 +76,8 @@ main button:nth-child(3){
     background-color: var(--green);
 }
 
-main picture {
+main > section .imgContainer {
+    justify-content: center;
     width: 70vw;
     height: 100%;
 }
