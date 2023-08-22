@@ -13,6 +13,7 @@ const cardContainer = document.querySelector('#favorites > .container');
 
 //Declaración de variables
 let imageData;
+let favLength = 0;
 
 //Función fetch para obtener imagen aleatoria
 //por defecto, retornará un ARRAY‼️
@@ -28,7 +29,7 @@ async function fetchData(url) {
 }
 
 //Funcion fetch para guardar imagen en favoritos
-async function fetchFavorites(_body){
+async function fetchSaveFavorites(_body) {
     try {
         const response = await fetch(API + FAVORITES, {
             method: 'POST',
@@ -39,6 +40,18 @@ async function fetchFavorites(_body){
             body: _body
         });
         return response;
+    } catch (error) {
+        console.log('Error: ', error);
+    }
+}
+
+//Funcion fetch para obtener los favoritos
+async function fetchFavorites(url) {
+    try {
+        const response = await fetch(url + QPAR + API_KEY);
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
         console.log('Error: ', error);
     }
@@ -74,9 +87,9 @@ function generateImage() {
 }
 
 //Funcion que llama al fetch favorites
-function saveImage(){
-    console.log('image data: ',imageData);
-    fetchFavorites(generateBody(imageData[0].id))
+function saveImage() {
+    console.log('image data: ', imageData);
+    fetchSaveFavorites(generateBody(imageData[0].id))
         .then((result) => {
             console.log(result);
         })
@@ -84,7 +97,11 @@ function saveImage(){
 }
 
 //Funcion para generar cards de favoritos
-function generateFavCard(arr){
+function generateFavCard(arr) {
+    if(favLength < arr.length){
+        favLength = arr.length;
+        //TODO
+    }
     for (const element of arr) {
         //creacion de card container
         const card = document.createElement('div');
@@ -94,12 +111,12 @@ function generateFavCard(arr){
         //Creacion de picture
         const picture = document.createElement('picture');
         const img = document.createElement('img');
-        img.setAttribute('src', element.url)
+        img.setAttribute('src', element.image.url)
         picture.appendChild(img);
 
         //Creaccion de p
         const p = document.createElement('p');
-        p.innerText = element.id;
+        p.innerText = element.image_id;
 
         //Union de elementos a el padre Card
         card.appendChild(picture);
@@ -110,8 +127,16 @@ function generateFavCard(arr){
 }
 
 //Abrir panel de favoritos
-function toggleFavorites(){
+function toggleFavorites() {
     favoritePanel.classList.toggle('inactive');
+    if (!favoritePanel.classList.contains('inactive')) {
+        fetchFavorites(API + FAVORITES)
+            .then((result) => {
+                console.log(result);
+                generateFavCard(result)
+            })
+            .catch((error) => console.log('Error: ', error))
+    }
 }
 
 //Botones y otras funcionalidades
