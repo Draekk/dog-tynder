@@ -84,7 +84,8 @@ main picture {
 
 main picture > img {
     background: none;
-    width: 100%;
+    max-width: 100%;
+    max-height: 70vh;
 }
 
 /* Footer */
