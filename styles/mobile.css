@@ -1,0 +1,95 @@
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    --shadow: rgba(0,0,0,0.5);
+    --bright: rgba(255,255,255,0.2);
+    --dark-red: #590d22;
+    --red: #d00000;
+    --green: #29bf12;
+    --pink: #ff758f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+html {
+    font-size: 10px;
+    font-family: sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* General */
+
+button {
+    font-size: 5vh;
+    background: none;
+}
+
+/* Header */
+
+header {
+    background-color: var(--pink);
+    height: 10vh;
+}
+
+h1 {
+    background: none;
+    font-size: 5vh;
+}
+
+/* Main */
+
+main {
+    height: 80vh;
+    padding: 2vw;
+}
+
+main .container {
+    justify-content: space-between;
+    height: 100%;
+}
+
+main button {
+    width: 15vw;
+    height: 100%;
+}
+
+main button:nth-child(1){
+    background-color: var(--red);
+}
+
+main button:nth-child(3){
+    background-color: var(--green);
+}
+
+main picture {
+    width: 70vw;
+    height: 100%;
+}
+
+main picture > img {
+    background: none;
+    width: 100%;
+}
+
+/* Footer */
+
+footer {
+    background-color: var(--dark-red);
+    height: 10vh;
+}
