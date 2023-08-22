@@ -7,11 +7,15 @@ const FAVORITES = '/favourites';
 const mainImage = document.querySelector('main picture > img');
 const badButton = document.querySelector('main button:nth-child(1)');
 const goodButton = document.querySelector('main button:nth-child(3)');
+const favButton = document.querySelector('footer button');
+const favoritePanel = document.getElementById('favorites');
+const cardContainer = document.querySelector('#favorites > .container');
 
 //Declaración de variables
 let imageData;
 
 //Función fetch para obtener imagen aleatoria
+//por defecto, retornará un ARRAY‼️
 async function fetchData(url) {
     try {
         const response = await fetch(url + QPAR + API_KEY);
@@ -79,7 +83,68 @@ function saveImage(){
         .catch((error) => console.log('Error: ', error))
 }
 
+//Funcion para generar cards de favoritos
+function generateFavCard(arr){
+    for (const element of arr) {
+        //creacion de card container
+        const card = document.createElement('div');
+        card.classList.add('container');
+        card.classList.add('card');
+
+        //Creacion de picture
+        const picture = document.createElement('picture');
+        const img = document.createElement('img');
+        img.setAttribute('src', element.url)
+        picture.appendChild(img);
+
+        //Creaccion de p
+        const p = document.createElement('p');
+        p.innerText = element.id;
+
+        //Union de elementos a el padre Card
+        card.appendChild(picture);
+        card.appendChild(p);
+        cardContainer.appendChild(card);
+
+    }
+}
+
+//Abrir panel de favoritos
+function toggleFavorites(){
+    favoritePanel.classList.toggle('inactive');
+}
+
 //Botones y otras funcionalidades
 generateImage()
 badButton.addEventListener('click', generateImage);
 goodButton.addEventListener('click', saveImage);
+favButton.addEventListener('click', toggleFavorites)
+
+// const perros = [
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     },
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     },
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     },
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     },
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     },
+//     {
+//         id: 'qwe',
+//         url: 'sfwwe'
+//     }
+// ]
+
+// generateFavCard(perros);

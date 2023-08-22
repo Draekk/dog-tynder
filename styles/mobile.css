@@ -40,6 +40,10 @@ button {
     background: none;
 }
 
+.inactive {
+    display: none;
+}
+
 /* Header */
 
 header {
@@ -93,4 +97,41 @@ main picture > img {
 footer {
     background-color: var(--dark-red);
     height: 10vh;
+}
+
+/* Favorites */
+
+#favorites {
+    flex-direction: column;
+    background-color: var(--black);
+    height: 80vh;
+    width: 100vw;
+    position: absolute;
+    top: 10vh;
+}
+
+#favorites h2 {
+    margin: 2vh;
+    font-size: 3vh;
+}
+
+#favorites .container {
+    overflow: scroll;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding: 1vh;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#favorites .card {
+    background-color: var(--white);
+    width: 28vh;
+    height: 35vh;
+    margin: 2vh;
+    border-radius: 2vh;
 }
