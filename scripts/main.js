@@ -1,9 +1,11 @@
-// Declaración de constantes
+// Declaración de constantes API
 const API = 'https://api.thedogapi.com/v1';
 const QPAR = '?api_key=';
 const API_KEY = 'live_5TXTNFZOUjeEht7wfDXoyX7IZm3TWvmFNGHZGOo5WaxGjMkiFxZiqV1zcRFLTZ6L';
 const RANDOM = '/images/search';
 const FAVORITES = '/favourites';
+
+//Declaración de constantes del DOM
 const mainImage = document.querySelector('main picture > img');
 const badButton = document.querySelector('main button:nth-child(1)');
 const goodButton = document.querySelector('main button:nth-child(3)');
@@ -22,6 +24,9 @@ async function fetchData(url) {
         const response = await fetch(url + QPAR + API_KEY);
         const data = await response.json();
         console.log(data);
+        if (response.status !== 200) {
+            alert(`Hubo un error: ${response.statusText} - ${data.message}`);
+        }
         return data;
     } catch (error) {
         console.log('Error: ', error);
@@ -39,7 +44,11 @@ async function fetchSaveFavorites(_body) {
             },
             body: _body
         });
-        return response;
+        const data = await response.json();
+        if (response.status !== 200) {
+            alert(`Hubo un error: ${response.statusText} - ${data.message}`);
+        }
+        return data;
     } catch (error) {
         console.log('Error: ', error);
     }
@@ -51,6 +60,9 @@ async function fetchFavorites(url) {
         const response = await fetch(url + QPAR + API_KEY);
         const data = await response.json();
         console.log(data);
+        if (response.status !== 200) {
+            alert(`Hubo un error: ${response.statusText} - ${data.message}`);
+        }
         return data;
     } catch (error) {
         console.log('Error: ', error);
@@ -99,7 +111,7 @@ function saveImage() {
 
 //Funcion para generar cards de favoritos
 function generateFavCard(arr) {
-    if(favLength < arr.length){
+    if (favLength < arr.length) {
         const newArr = arr.slice(favLength);
         favLength = arr.length;
         for (const element of newArr) {
@@ -107,18 +119,18 @@ function generateFavCard(arr) {
             const card = document.createElement('div');
             card.classList.add('container');
             card.classList.add('card');
-    
+
             //Creacion de picture
             const picture = document.createElement('picture');
             const img = document.createElement('img');
             img.setAttribute('src', element.image.url)
             picture.classList.add('favImgContainer');
             picture.appendChild(img);
-    
+
             //Creaccion de p
             const p = document.createElement('p');
             p.innerHTML = '<b>Dog ID: </b>' + element.image_id;
-    
+
             //Union de elementos a el padre Card
             card.appendChild(picture);
             card.appendChild(p);
@@ -145,32 +157,3 @@ generateImage()
 badButton.addEventListener('click', generateImage);
 goodButton.addEventListener('click', saveImage);
 favButton.addEventListener('click', toggleFavorites)
-
-// const perros = [
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     },
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     },
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     },
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     },
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     },
-//     {
-//         id: 'qwe',
-//         url: 'sfwwe'
-//     }
-// ]
-
-// generateFavCard(perros);
