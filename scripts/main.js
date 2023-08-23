@@ -112,6 +112,7 @@ function generateFavCard(arr) {
             const picture = document.createElement('picture');
             const img = document.createElement('img');
             img.setAttribute('src', element.image.url)
+            picture.classList.add('favImgContainer');
             picture.appendChild(img);
     
             //Creaccion de p

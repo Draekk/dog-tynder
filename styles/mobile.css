@@ -111,8 +111,12 @@ footer {
 }
 
 #favorites h2 {
-    margin: 2vh;
+    padding: 2vh;
     font-size: 3vh;
+    text-align: center;
+    background: none;
+    width: 100%;
+    border-bottom: 0.1vh solid var(--bright);
 }
 
 #favorites .container {
@@ -129,9 +133,41 @@ footer {
 }
 
 #favorites .card {
-    background-color: var(--white);
+    align-items: start;
+    justify-content: center;
+    background-color: var(--pink);
     width: 28vh;
     height: 35vh;
     margin: 2vh;
     border-radius: 2vh;
+    box-shadow: 0 0 1vh 0.6vh var(--bright);
+}
+
+#favorites .card > .favImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 25vh;
+    overflow: hidden;
+    background: none;
+}
+
+#favorites img {
+    height: 25vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 1vh;
+    background: none;
+}
+
+#favorites p {
+    background: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2vh;
+    border: solid 0.1vh var(--shadow);
+    border-radius: 0.5vh;
+    width: 90%;
 }
