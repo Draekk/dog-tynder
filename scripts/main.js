@@ -117,7 +117,7 @@ function generateFavCard(arr) {
     
             //Creaccion de p
             const p = document.createElement('p');
-            p.innerText = element.image_id;
+            p.innerHTML = '<b>Dog ID: </b>' + element.image_id;
     
             //Union de elementos a el padre Card
             card.appendChild(picture);

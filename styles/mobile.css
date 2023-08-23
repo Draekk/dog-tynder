@@ -2,6 +2,8 @@
     --white: #FFFFFF;
     --black: #000000;
     --shadow: rgba(0,0,0,0.5);
+    --shadow-dark: rgba(0,0,0,0.7);
+    --shadow-very-dark: rgba(0,0,0,0.8);
     --bright: rgba(255,255,255,0.2);
     --dark-red: #590d22;
     --red: #d00000;
@@ -14,13 +16,19 @@
     padding: 0;
     box-sizing: border-box;
     border: none;
-    background-color: var(--black);
     color: var(--white);
 }
 
 html {
     font-size: 10px;
     font-family: sans-serif;
+    background: linear-gradient(
+        90deg,
+        var(--red),
+        var(--red),
+        var(--green),
+        var(--green)
+    );
 }
 
 body {
@@ -35,6 +43,10 @@ body {
 
 /* General */
 
+b {
+    background: none;
+}
+
 button {
     font-size: 5vh;
     background: none;
@@ -46,20 +58,20 @@ button {
 
 /* Header */
 
-header {
-    background-color: var(--pink);
-    height: 10vh;
+body header {
+    background-color: var(--shadow);
+    height: 15vh;
 }
 
 h1 {
     background: none;
-    font-size: 5vh;
+    font-size: 7vh;
 }
 
 /* Main */
 
 main {
-    height: 80vh;
+    height: 73vh;
 }
 
 main .container {
@@ -95,19 +107,19 @@ main picture > img {
 /* Footer */
 
 footer {
-    background-color: var(--dark-red);
-    height: 10vh;
+    background-color: var(--shadow);
+    height: 12vh;
 }
 
 /* Favorites */
 
 #favorites {
     flex-direction: column;
-    background-color: var(--black);
-    height: 80vh;
+    background-color: var(--shadow-dark);
+    height: 73vh;
     width: 100vw;
     position: absolute;
-    top: 10vh;
+    top: 15vh;
 }
 
 #favorites h2 {
@@ -135,7 +147,7 @@ footer {
 #favorites .card {
     align-items: start;
     justify-content: center;
-    background-color: var(--pink);
+    background-color: var(--shadow-very-dark);
     width: 28vh;
     height: 35vh;
     margin: 2vh;
@@ -165,9 +177,9 @@ footer {
 #favorites p {
     background: none;
     text-align: center;
-    font-weight: bold;
     font-size: 2vh;
     border: solid 0.1vh var(--shadow);
-    border-radius: 0.5vh;
-    width: 90%;
+    border-radius: 1vh;
+    width: 95%;
+    padding: 1.7vh 0;
 }
