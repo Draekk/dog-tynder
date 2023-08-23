@@ -92,6 +92,7 @@ function saveImage() {
     fetchSaveFavorites(generateBody(imageData[0].id))
         .then((result) => {
             console.log(result);
+            generateImage();
         })
         .catch((error) => console.log('Error: ', error))
 }
@@ -99,30 +100,29 @@ function saveImage() {
 //Funcion para generar cards de favoritos
 function generateFavCard(arr) {
     if(favLength < arr.length){
+        const newArr = arr.slice(favLength);
         favLength = arr.length;
-        //TODO
-    }
-    for (const element of arr) {
-        //creacion de card container
-        const card = document.createElement('div');
-        card.classList.add('container');
-        card.classList.add('card');
-
-        //Creacion de picture
-        const picture = document.createElement('picture');
-        const img = document.createElement('img');
-        img.setAttribute('src', element.image.url)
-        picture.appendChild(img);
-
-        //Creaccion de p
-        const p = document.createElement('p');
-        p.innerText = element.image_id;
-
-        //Union de elementos a el padre Card
-        card.appendChild(picture);
-        card.appendChild(p);
-        cardContainer.appendChild(card);
-
+        for (const element of newArr) {
+            //creacion de card container
+            const card = document.createElement('div');
+            card.classList.add('container');
+            card.classList.add('card');
+    
+            //Creacion de picture
+            const picture = document.createElement('picture');
+            const img = document.createElement('img');
+            img.setAttribute('src', element.image.url)
+            picture.appendChild(img);
+    
+            //Creaccion de p
+            const p = document.createElement('p');
+            p.innerText = element.image_id;
+    
+            //Union de elementos a el padre Card
+            card.appendChild(picture);
+            card.appendChild(p);
+            cardContainer.appendChild(card);
+        }
     }
 }
 
@@ -133,7 +133,7 @@ function toggleFavorites() {
         fetchFavorites(API + FAVORITES)
             .then((result) => {
                 console.log(result);
-                generateFavCard(result)
+                generateFavCard(result);
             })
             .catch((error) => console.log('Error: ', error))
     }
