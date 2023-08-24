@@ -178,8 +178,30 @@ footer {
     background: none;
     text-align: center;
     font-size: 2vh;
-    border: solid 0.1vh var(--shadow);
-    border-radius: 1vh;
     width: 95%;
-    padding: 1.7vh 0;
+    margin-top: 1vh;
+}
+
+#favorites .deleteBtn {
+    width: 9vh;
+    height: 4.7vh;
+    font-size: 4.2vh;
+    text-align: left;
+    padding-left: 1vh;
+    border-radius: 3vh;
+    position: relative;
+    top: -29.5vh;
+    right: -14.5vh;
+    cursor: pointer;
+    background-color: var(--red);
+}
+
+#favorites .deleteBtn:hover {
+    right: -12.5vh;
+    padding-left: 2.3vh;
+}
+
+#favorites .card:hover {
+    position: relative;
+    top: -2vh;
 }

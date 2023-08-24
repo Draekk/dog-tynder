@@ -74,6 +74,29 @@ async function applyImage(imageUrl) {
     mainImage.src = await imageUrl;
 }
 
+//Funcion que elimina imagen de favoritos
+async function fetchDeleteFav(url, id) {
+    console.log(url + id);
+    try {
+        const response = await fetch(url + id, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json',
+                'x-api-key': API_KEY
+            }
+        });
+        const data = await response.json();
+        if (response.status !== 200) {
+            alert(`Hubo un error: ${response.statusText} - ${data.message}`);
+        } else {
+            alert(`Se ha eliminado ${id} satisfactoriamente`);
+        }
+        return data;
+    } catch (error) {
+        console.log('Error: ', error);
+    }
+}
+
 //Funcion para crear el body y enviarlo al fetch
 function generateBody(id) {
     try {
@@ -111,7 +134,7 @@ function saveImage() {
 
 //Funcion para generar cards de favoritos
 function generateFavCard(arr) {
-    if (favLength < arr.length) {
+    if (favLength !== arr.length) {
         const newArr = arr.slice(favLength);
         favLength = arr.length;
         for (const element of newArr) {
@@ -127,14 +150,35 @@ function generateFavCard(arr) {
             picture.classList.add('favImgContainer');
             picture.appendChild(img);
 
-            //Creaccion de p
+            //Creacion de p
             const p = document.createElement('p');
             p.innerHTML = '<b>Dog ID: </b>' + element.image_id;
+
+            //Creacion de deleteButton
+            const delBtn = document.createElement('button');
+            delBtn.innerText = 'x';
+            delBtn.classList.add('deleteBtn')
+
+            //Event de boton de eliminar
+            delBtn.addEventListener('click', () => {
+                fetchDeleteFav(API + FAVORITES + '/', element.id)
+                    .then(() => {
+                        fetchFavorites(API + FAVORITES)
+                            .then((result) => {
+                                card.classList.add('inactive');
+                                favLength = result.length;
+                            })
+                            .catch((error) => console.log('Error: ', error))
+                    })
+                    .catch((error) => console.log('Error: ', error))
+            });
 
             //Union de elementos a el padre Card
             card.appendChild(picture);
             card.appendChild(p);
+            card.appendChild(delBtn);
             cardContainer.appendChild(card);
+
         }
     }
 }
@@ -145,7 +189,6 @@ function toggleFavorites() {
     if (!favoritePanel.classList.contains('inactive')) {
         fetchFavorites(API + FAVORITES)
             .then((result) => {
-                console.log(result);
                 generateFavCard(result);
             })
             .catch((error) => console.log('Error: ', error))
