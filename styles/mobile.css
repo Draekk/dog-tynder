@@ -4,11 +4,14 @@
     --shadow: rgba(0,0,0,0.5);
     --shadow-dark: rgba(0,0,0,0.7);
     --shadow-very-dark: rgba(0,0,0,0.8);
+    --shadow-green: rgba(0,255,0,0.8)
     --bright: rgba(255,255,255,0.2);
     --dark-red: #590d22;
     --red: #d00000;
     --green: #29bf12;
+    --green-transparent: #29bf128f;
     --pink: #ff758f;
+    --pink-transparent: #ff758e9c;
 }
 
 * {
@@ -106,9 +109,18 @@ main picture > img {
 
 /* Footer */
 
-footer {
+.fContainer {
+    justify-content: space-evenly;
     background-color: var(--shadow);
     height: 12vh;
+}
+
+.upload {
+    width: 7vh;
+}
+
+.upload > img {
+    width: 100%;
 }
 
 /* Favorites */
@@ -204,4 +216,70 @@ footer {
 #favorites .card:hover {
     position: relative;
     top: -2vh;
+}
+
+
+/* Upload Images */
+
+#uploadImg {
+    
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: -62vh;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 70vw;
+    max-width: 30rem;
+    height: 50vh;
+    background-color: var(--shadow-dark);
+}
+
+#uploadImg h2 {
+    text-align: center;
+    width: 100%;
+    padding: 3vh 0;
+    font-size: 4vh;
+    background-color: var(--shadow-very-dark);
+}
+
+#uploadForm {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#uploadForm input {
+    width: 50%;
+    max-width: 20rem;
+}
+
+input::-webkit-file-upload-button{
+    display: block;
+    border: none;
+    border-radius: 2vh;
+    color: var(--white);
+    background-color: var(--pink-transparent);
+    width: 100%;
+    padding: 3vh;
+    font-size: 100%;
+    box-shadow: 0 0 1vh 0.6vh var(--pink-transparent)inset;
+}
+
+input::-webkit-file-upload-button:active {
+    background-color: var(--pink);
+}
+
+#uploadForm button {
+    height: 10vh;
+    width: 100%;
+    border-radius: 2vh;
+    background-color: var(--green-transparent);
+    box-shadow: 0 0 1vh 0.6vh var(--green-transparent)inset;
+}
+
+#uploadForm button:active {
+    background-color: var(--green);
 }

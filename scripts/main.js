@@ -9,9 +9,12 @@ const FAVORITES = '/favourites';
 const mainImage = document.querySelector('main picture > img');
 const badButton = document.querySelector('main button:nth-child(1)');
 const goodButton = document.querySelector('main button:nth-child(3)');
-const favButton = document.querySelector('footer button');
+const favButton = document.querySelector('footer .fav');
 const favoritePanel = document.getElementById('favorites');
 const cardContainer = document.querySelector('#favorites > .container');
+const btnUpload = document.querySelector('footer .upload');
+const uploadSection = document.querySelector('#uploadImg');
+const inputFile = document.querySelector('#file');
 
 //Declaración de variables
 let imageData;
@@ -185,7 +188,7 @@ function generateFavCard(arr) {
 
 //Abrir panel de favoritos
 function toggleFavorites() {
-    favoritePanel.classList.toggle('inactive');
+    togglePanels(favoritePanel);
     if (!favoritePanel.classList.contains('inactive')) {
         fetchFavorites(API + FAVORITES)
             .then((result) => {
@@ -195,8 +198,27 @@ function toggleFavorites() {
     }
 }
 
+//Abrir panel de subir imagenes
+function toggleUploadPanel() {
+    togglePanels(uploadSection);
+}
+
+//Comprobar y cerrar paneles abiertos
+function togglePanels(element) {
+    let elements = [favoritePanel, uploadSection];
+    for (const i of elements) {
+        if(i.classList.contains('inactive') && i !== element){
+            i.classList.add('inactive');
+        } else {
+            i.classList.toggle('inactive');
+        }
+            
+    }
+}
+
 //Botones y otras funcionalidades
 generateImage()
 badButton.addEventListener('click', generateImage);
 goodButton.addEventListener('click', saveImage);
-favButton.addEventListener('click', toggleFavorites)
+favButton.addEventListener('click', toggleFavorites);
+btnUpload.addEventListener('click', toggleUploadPanel);
