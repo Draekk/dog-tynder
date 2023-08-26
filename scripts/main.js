@@ -4,6 +4,7 @@ const QPAR = '?api_key=';
 const API_KEY = 'live_5TXTNFZOUjeEht7wfDXoyX7IZm3TWvmFNGHZGOo5WaxGjMkiFxZiqV1zcRFLTZ6L';
 const RANDOM = '/images/search';
 const FAVORITES = '/favourites';
+const UPLOADIMAGE = '/images/upload';
 
 //Declaración de constantes del DOM
 const mainImage = document.querySelector('main picture > img');
@@ -14,7 +15,8 @@ const favoritePanel = document.getElementById('favorites');
 const cardContainer = document.querySelector('#favorites > .container');
 const btnUpload = document.querySelector('footer .upload');
 const uploadSection = document.querySelector('#uploadImg');
-const inputFile = document.querySelector('#file');
+const form = document.querySelector('#uploadForm');
+const btnUploadImg = document.querySelector('#uploadForm button');
 
 //Declaración de variables
 let imageData;
@@ -100,10 +102,34 @@ async function fetchDeleteFav(url, id) {
     }
 }
 
+//Funcion fetch para subir imagenes
+async function fetchUploadImages(url, form){
+    try {
+        console.log(form);
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-API-KEY': API_KEY
+            },
+            body: form
+        });
+        console.log(response);
+        const data = await response.json();
+        console.log(data);
+        if (response.status !== 201) {
+            alert(`Hubo un error: ${response.statusText} - ${data.message}`);
+        } else {
+            alert(`Imagen subida exitosamente`);
+        }
+        return data;
+    } catch (error) {
+        console.log('Error: ', error);
+    }
+}
+
 //Funcion para crear el body y enviarlo al fetch
 function generateBody(id) {
     try {
-        console.log('Generando id: ', id);
         let body = JSON.stringify({
             'image_id': id,
             'sub_id': 'user-123'
@@ -133,6 +159,17 @@ function saveImage() {
             generateImage();
         })
         .catch((error) => console.log('Error: ', error))
+}
+
+//Funcion que llama al upload Fetch
+function uploadImage() {
+    const formData = new FormData(form);
+    fetchUploadImages(API + UPLOADIMAGE, formData)
+    .then((result) => {
+        applyImage(result.url);
+        togglePanels(uploadSection);
+    })
+    .catch((error) => console.log(error))
 }
 
 //Funcion para generar cards de favoritos
@@ -212,8 +249,8 @@ function togglePanels(element) {
         } else {
             i.classList.toggle('inactive');
         }
-            
     }
+    document.querySelector('#uploadForm input').value = '';
 }
 
 //Botones y otras funcionalidades
@@ -222,3 +259,4 @@ badButton.addEventListener('click', generateImage);
 goodButton.addEventListener('click', saveImage);
 favButton.addEventListener('click', toggleFavorites);
 btnUpload.addEventListener('click', toggleUploadPanel);
+btnUploadImg.addEventListener('click', uploadImage);
