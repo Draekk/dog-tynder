@@ -11,5 +11,6 @@ This project was initiated with the aim of learning and honing the skills of int
 - Save images.
 - View saved images.
 - Delete saved images.
+- Upload custom images.
 
 Feel free to contribute or provide feedback as the project evolves!
