@@ -1,9 +1,10 @@
 # Dog Tynder
+
 Cute app for rating pictures of puppies.
 
 ## Description
 
-This project was initiated with the aim of learning and honing the skills of interfacing with APIs. It's currently a work in progress, and updates will be rolled out as I gain deeper insights into the subject matter. Stay tuned for more enhancements and features!
+This project started as a fun way to practice working with APIs and has grown into an ongoing learning journey. As I continue to explore and understand more, I'll be adding new updates and features. It's also a great showcase of my JavaScript skills. Stay tuned for exciting improvements!
 
 ## Current Available Features
 
@@ -14,3 +15,7 @@ This project was initiated with the aim of learning and honing the skills of int
 - Upload custom images.
 
 Feel free to contribute or provide feedback as the project evolves!
+
+## Website
+
+Check out the live version of the app [Dog Tynder](draekk.github.io/dog-tynder/).
